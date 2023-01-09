@@ -14,5 +14,5 @@ class RequestSchema(Schema):
             raise ValidationError('"cmd" contains invalid value')
 
 
-class BatchRequestSchema():
+class BatchRequestSchema(Schema):
     queries = fields.Nested(RequestSchema, many=True)
