@@ -14,17 +14,18 @@ FILE_NAME = 'data/apache_logs.txt'
 @main_bp.route('/perform_query', methods=['POST'])
 def perform_query() -> Response:
     try:
-        params: Dict[str, List[Dict[str, str]]] = BatchRequestSchema().load(data=request.json)
+        params: Dict[str, Dict] = BatchRequestSchema().load(data=request.json)
     except ValidationError as error:
         return Response(response=error.messages, status=400)
 
     result: Optional[Iterable[str]] = None
-    for query in params['queries']:
-        result = build_query(
-            cmd=query['cmd'],
-            value=query['value'],
-            file_name=FILE_NAME,
-            data=result,
-        )
+    #for param in params['queries'].values():
+    data = params['queries']
+    result = build_query(
+        cmd=data["cmd"],
+        value=data["value"],
+        file_name=FILE_NAME,
+        data=result,
+    )
 
     return jsonify(result)

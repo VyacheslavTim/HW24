@@ -25,5 +25,4 @@ def sort_query(param: str, data: Iterable[str]) -> List[str]:
 
 
 def regex_query(param: str, data: Iterable[str]) -> Iterator[str]:
-    pattern = re.compile(param)
-    return filter(lambda x: re.search(pattern, x), data)
+    return filter(lambda x: re.search(param, x), data)

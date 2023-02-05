@@ -23,4 +23,4 @@ def build_query(cmd: str, value: str, file_name: str, data: Optional[list[str]])
     else:
         prepared_data = data
 
-    return list(CMD_TO_FUNCTIONS[cmd](value=value, data=prepared_data))
+    return list(CMD_TO_FUNCTIONS[cmd](param=value, data=prepared_data))

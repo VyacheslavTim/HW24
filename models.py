@@ -15,4 +15,5 @@ class RequestSchema(Schema):
 
 
 class BatchRequestSchema(Schema):
-    queries = fields.Nested(RequestSchema, many=True)
+    queries = fields.Nested(RequestSchema())
+
