@@ -1,4 +1,4 @@
-from typing import Dict, List, Optional, Iterable
+from typing import Dict, Optional, Iterable
 
 from flask import Blueprint, request, jsonify, Response
 from marshmallow import ValidationError
@@ -19,13 +19,12 @@ def perform_query() -> Response:
         return Response(response=error.messages, status=400)
 
     result: Optional[Iterable[str]] = None
-    #for param in params['queries'].values():
-    data = params['queries']
-    result = build_query(
-        cmd=data["cmd"],
-        value=data["value"],
-        file_name=FILE_NAME,
-        data=result,
-    )
+    for param in params['queries']:
+        result = build_query(
+            cmd=param["cmd"],
+            value=param["value"],
+            file_name=FILE_NAME,
+            data=result,
+        )
 
     return jsonify(result)
